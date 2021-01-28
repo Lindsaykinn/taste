@@ -1,7 +1,6 @@
 class StaticController < ApplicationController
-  # before_action :authenticate_user!
-
-  # def home
-    
-  # end
+  
+  def home
+    render layout: "home_page_layout"
+  end
 end
