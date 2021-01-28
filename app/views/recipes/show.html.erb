@@ -1,8 +1,28 @@
 <h4><%= @recipe.title %></h4>
-<h5 style="font-size:1.45rem">Rating:</h5>
+<div class="container" style="margin-left:35px;">
+<h5 style="font-size:1.45rem;">● Rating: <%= @recipe.rating %>/5</h5>
 
-<h5 style="font-size:1.45rem">Ingredients:</h5>
+<h5 style="font-size:1.45rem"> ● Category:</h5>
+  <ul>
+    <li style="margin-left:20px;"><%= @recipe.category %></li>
+  </ul>
+
+<h5 style="font-size:1.45rem">● Description:</h5>
+  <ul>
+    <li style="margin-left:20px;"><%= @recipe.description %></li>
+  </ul>
+
+<h5 style="font-size:1.45rem">● Ingredients:</h5>
+  <ul>
+    <li style="margin-left:20px;"><%=@recipe.ingredient%></li>
+  </ul>
 
 
-<h5 style="font-size:1.45rem">Instructions:</h5>
-<p><%= @recipe.instructions%> </p>
+<h5 style="font-size:1.45rem">● Instructions: </h5> 
+  <p style="margin-left:20px;"><%= @recipe.instructions%> </p>
+</div>
+
+<div style="margin-left:35px;">
+<%= link_to "Edit", edit_recipe_path(@recipe), class:"custom_button" %>
+<%= link_to "Delete", recipe_path(@recipe), method: "delete", class:"custom_button"%>
+</div>
