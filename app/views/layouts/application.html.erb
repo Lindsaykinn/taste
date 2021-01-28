@@ -8,6 +8,11 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Montserrat:wght@300&family=Sacramento&display=swap" rel="stylesheet">
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -18,6 +23,24 @@
   </head>
 
   <body>
-    <%= yield %>
+  <nav style="background-color: #006a71;">
+  
+    <div class="nav-wrapper container" >
+      <a href="#!" class="brand-logo left" style="font-family: 'Sacramento', cursive; font-size:55px; padding-top:7px;">Taste</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li class="active"><%=link_to("Home", root_path)%></li>
+        <li class="active"><%=link_to("Recipes", recipes_path)%></li>
+        <li class="active"><%=link_to("Create Recipe", new_recipe_path)%></li>
+        <li class="active"><%=link_to("LogIn", "#")%></li>
+        <li class="active"><%=link_to("SignUp", "#")%></li>
+        <li><%= link_to("Log In With Google", '/auth/google_oauth2', method: :post)%></li>
+      </ul>
+    </div>
+
+  </nav>
+
+  <div class="container">
+    <%= yield %>  
+  </div>
   </body>
 </html>
