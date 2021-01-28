@@ -13,14 +13,31 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      redirect_to recipes_path 
+      redirect_to recipes_path(@recipe)
     else
-      render :new
+      redirect_to new_recipe_path
     end
   end
 
   def show
 
+  end
+
+  def edit
+
+  end
+
+  def update
+    if @recipe.update(recipe_params)
+      redirect_to recipe_path(@recipe)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @recipe.destroy
+    redirect_to recipes_path
   end
 
   
@@ -31,7 +48,6 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :description, :ingredient)
-      # ingredients_attributes: [:id, :name], direction_attributes: [:id, :step])
+    params.require(:recipe).permit(:title, :description, :ingredient, :instructions, :rating, :category)
   end
 end
