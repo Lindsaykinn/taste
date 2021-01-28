@@ -1,0 +1,32 @@
+<%= form_for @recipe do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :rating %>
+    <%= f.number_field :rating, in: 1..5 %>
+  </div>
+
+  <div>
+    <%= f.label :category %>
+    <%= f.text_field :category %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div>
+    <%= f.label :ingredients %>
+    <%= f.text_field :ingredient %>
+  </div>
+  
+  <div>
+    <%= f.label :instructions %>
+    <%= f.text_field :instructions%>
+  </div>
+
+  <%= f.submit button_name, class: "custom_button"%>
+<% end %>

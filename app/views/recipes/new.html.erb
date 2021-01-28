@@ -1,20 +1,5 @@
 <h3>Create Recipe</h3>
 
-<%= form_for @recipe do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  
-  <div>
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div>
-  
-  <div>
-    <%= f.label :instructions %>
-    <%= f.text_field :instructions%>
-  </div>
+<%= render partial: "form", locals: {recipe: @recipe, button_name: "Create Recipe"} %>
 
-  <%= f.submit "Create Recipe", class: "custom_button"%>
-<% end %>
+
