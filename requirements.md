@@ -33,7 +33,7 @@ Your models must:
 
     [ ] • Your views should use helper methods and partials when appropriate.
 
-    [ ] • Follow patterns in the Rails Style Guide (Links to an external site.) and the Ruby Style Guide (Links to an external site.).
+    [ ] • Follow patterns in the Rails Style Guide and the Ruby Style Guide.
 
 [ ] 10. Do not use scaffolding to build your project. Your goal here is to learn. Scaffold is a way to get up and running quickly, but learning a lot is not one of the benefits of scaffolding.
 
