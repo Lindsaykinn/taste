@@ -11,6 +11,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
+    params[:category][:user_id] = current_user.id
     @category = Category.new(category_params)
 
     if @category.save
@@ -27,6 +28,6 @@ class CategoriesController < ApplicationController
   private
   
   def category_params
-    params.require(:category).permit(:name, recipes_attributes: [:title, :description, :ingredient, :instructions, :rating])
+    params.require(:category).permit(:name, :user_id, recipes_attributes: [:title, :description, :ingredient, :instructions, :rating])
   end
 end

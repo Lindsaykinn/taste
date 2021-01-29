@@ -1,9 +1,10 @@
 class Category < ApplicationRecord
+  belongs_to :user
   has_many :recipes
+  accepts_nested_attributes_for :recipes, reject_if: :all_blank
 
   validates :name, presence: true, uniqueness: true
 
-  accepts_nested_attributes_for :recipes, reject_if: :all_blank
 
   # def recipes_attributes=(recipes_attributes)
   #   recipes_attributes.each do |i, recipe_attributes| 

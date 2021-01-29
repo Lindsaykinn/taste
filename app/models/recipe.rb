@@ -1,9 +1,8 @@
 class Recipe < ApplicationRecord
-  validates :title, presence: true
-
-  belongs_to :category 
-
+  belongs_to :category
+  has_many :users, through: :categories  
   accepts_nested_attributes_for :category, reject_if: :all_blank
+  validates :title, presence: true
 
   # def categories_attributes=(categories_attributes)
   #   categories_attributes.each do |i, category_attributes| 
@@ -11,6 +10,11 @@ class Recipe < ApplicationRecord
   #   end
   # end
 
+  def category_attributes=(hash_of_attributes)
+    if !hash_of_attributes[:name].blank? 
+        self.category = Category.find_or_create_by(hash_of_attributes)
+    end
+  end
 
   def category_name
     self.category ? self.category.name : "Category not available"

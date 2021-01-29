@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   resources :recipes
   resources :categories do
-      resources :recipes, only: [:new, :create, :index]
+      resources :recipes
   end
 
   get '/signup', to: 'users#new', as: 'signup'
@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   # match '/auth/:google_oauth2/callback' => 'sessions#google', via: [:get,:post]
   # match '/auth/:google_oauth2/callback' => 'sessions#omniauth', via: [:get, :post]
 
-  get 'auth/google_oauth2/callback', to: 'sessions#omniauth'
+  # get 'auth/google_oauth2/callback', to: 'sessions#omniauth'
+  match '/auth/:google_oauth2/callback' => 'sessions#omniauth', via: [:get, :post]
 
   
 end

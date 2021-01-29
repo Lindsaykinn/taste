@@ -1,4 +1,4 @@
-<%= form_for @recipe do |f| %>
+<%= form_for [@category, @recipe] do |f| %>
   <div>
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -6,11 +6,6 @@
   <div>
     <%= f.label :rating %>
     <%= f.number_field :rating, in: 1..5 %>
-  </div>
-
-  <div>
-    <%= f.label :category %>
-    <%= f.text_field :category %>
   </div>
 
   <div>
@@ -28,5 +23,26 @@
     <%= f.text_field :instructions%>
   </div>
 
+  <h4>Select Category</h4>
+    <div>
+      <%= f.collection_select :category_id, Category.all, :id, :name %>    
+    </div>
+
+  <h4>Create Category</h4>
+    <%= f.fields_for :category, recipe.build_category do |cb| %>
+    <div>
+      <%= cb.label :name %>
+      <%= cb.text_field :name %>
+      <%= cb.hidden_field :user_id, value:current_user.id %>
+    </div>
+    <% end %>
+
   <%= f.submit button_name, class: "custom_button"%>
 <% end %>
+
+<script>$(document).ready(function(){
+    $('select').formSelect();
+  });</script>
+
+
+
