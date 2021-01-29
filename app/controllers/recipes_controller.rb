@@ -1,21 +1,39 @@
 class RecipesController < ApplicationController
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :find_category, only: [:index, :new, :create]
 
   def index
-    @recipes = Recipe.all
+    if @category 
+      @recipes = @category.recipes
+    else
+      @recipes = Recipe.all
+    end
   end
 
   def new
+    if @category 
+      @recipe = @category.recipes.build 
+      render :new_category_recipe
+    else
     @recipe = Recipe.new
+    end
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      redirect_to recipes_path(@recipe)
+      if @category
+        redirect_to category_recipes_path(@category) 
+      else
+        redirect_to recipes_path
+      end
     else
-      redirect_to new_recipe_path
+      if @category 
+        render :new_category_recipe
+      else
+        render :new
+      end
     end
   end
 
@@ -47,7 +65,13 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find_by_id(params[:id])
   end
 
+  def find_category
+    if params[:category_id]
+      @category = Category.find_by_id(params[:category_id])
+    end
+  end
+
   def recipe_params
-    params.require(:recipe).permit(:title, :description, :ingredient, :instructions, :rating, :category)
+    params.require(:recipe).permit(:title, :category_id, :description, :ingredient, :instructions, :rating, category_attributes: [:name])
   end
 end

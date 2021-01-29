@@ -1,7 +1,10 @@
-Rails.application.routes.draw do
-  resources :categories
+Rails.application.routes.draw do  
   root to: 'static#home'
+  
   resources :recipes
+  resources :categories do
+      resources :recipes, only: [:new, :create, :index]
+  end
 
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'

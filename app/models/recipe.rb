@@ -3,8 +3,15 @@ class Recipe < ApplicationRecord
 
   belongs_to :category  
 
+  def categories_attributes=(categories_attributes)
+    categories_attributes.each do |i, category_attributes| 
+    self.categories.build(category_attributes)
+    end
+  end
+
+
   def category_name
-    self.cateogory ? self.category.name : "Category not available"
+    self.category ? self.category.name : "Category not available"
   end  
 
 end
