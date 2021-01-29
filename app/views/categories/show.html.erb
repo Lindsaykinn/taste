@@ -1,5 +1,6 @@
 <h3><%= @category.name %></h3>
 
+<h5>This category's recipes here:</h5>
 <ul>
-  <li><%= link_to "#{@category.name}", category_recipes_path %> </li>
+  <li><%= render @category.recipes  %> </li>
 </ul>
