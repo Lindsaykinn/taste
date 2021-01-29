@@ -27,7 +27,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'omniauth'
-gem 'dotenv-rails'
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'omniauth-google-oauth2'
 # gem 'omniauth-rails_csrf_protection'
 
