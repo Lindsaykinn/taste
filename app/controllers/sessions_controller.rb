@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
-
+  before_action :redirect_if_logged_in, except: [:destroy]
+  
   def new 
-   
+   @user = User.new
   end
 
   #logging in w/o omniauth
@@ -9,7 +10,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(params[:email])
 
     if @user && @user.authenticate(params[:password])
-      login_user
+      session[:user_id] = @user.id
       redirect_to recipes_path
     else
       render :new
@@ -18,18 +19,19 @@ class SessionsController < ApplicationController
 
   #logging in with omniauth through Google
   def omniauth
-    @user = User.find_or_create_by(email: auth["info"]["unverified_email"]) do |user|
+    user = User.find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+      user.email = auth["info"]["email"]
       user.password = SecureRandom.hex(10)
+      user.first_name = auth["info"]["email"]
+      user.last_name = auth["info"]["email"]
     end
-    if @user && @user.id
-      session[:user_id] = @user.id
+    if user.valid?
+      session[:user_id] = user.id
       redirect_to recipes_path
     else
-      redirect_to '/login'
+      redirect_to signup_path
     end
-  end  
-  
-  
+  end    
 
 
   def destroy 

@@ -21,7 +21,6 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
-
     if @recipe.save
       if @category
         redirect_to category_recipes_path(@category) 
@@ -29,6 +28,7 @@ class RecipesController < ApplicationController
         redirect_to recipes_path
       end
     else
+      flash.now[:error] = @recipe.errors.full_messages
       if @category 
         render :new_category_recipe
       else
@@ -49,12 +49,14 @@ class RecipesController < ApplicationController
     if @recipe.update(recipe_params)
       redirect_to recipe_path(@recipe)
     else
+      flash.now[:error] = @recipe.errors.full_messages
       render :edit
     end
   end
 
   def destroy
     @recipe.destroy
+    flash[:notice] = "#{@recipe.title} was deleted."
     redirect_to recipes_path
   end
 
@@ -72,6 +74,14 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :category_id, :description, :ingredient, :instructions, :rating, category_attributes: [:name])
+    params.require(:recipe).permit(
+      :title, 
+      :category_id, 
+      :description, 
+      :ingredient, 
+      :instructions, 
+      :rating, 
+      category_attributes: [:name, :user_id]
+    )
   end
 end

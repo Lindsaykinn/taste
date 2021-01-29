@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      login_user
+      session[:user_id] = @user.id
       redirect_to recipes_path 
     else
       render :new
