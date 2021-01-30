@@ -25,7 +25,7 @@
 
   <h4>Select Category</h4>
     <div>
-      <%= f.collection_select :category_id, Category.all, :id, :name %>    
+      <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>    
     </div>
 
   <h4>Create Category</h4>

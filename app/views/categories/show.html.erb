@@ -3,3 +3,6 @@
 <ul>
   <li><%= render @category.recipes  %> </li>
 </ul>
+
+<%= link_to "Edit Category Name", edit_category_path(@category), class:"custom_button" %>
+<%= link_to "Delete Category Name", category_path(@category), method: "delete", class:"custom_button"%>
