@@ -5,7 +5,9 @@ class Category < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-
+  def self.alphabetize
+    order(name: :asc)
+  end
   # def recipes_attributes=(recipes_attributes)
   #   recipes_attributes.each do |i, recipe_attributes| 
   #   self.recipes.build(recipe_attributes)

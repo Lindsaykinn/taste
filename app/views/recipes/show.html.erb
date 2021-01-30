@@ -4,7 +4,8 @@
 
 <h5 style="font-size:1.45rem"> ● Category:</h5>
   <ul>
-    <li style="margin-left:20px;"><%= link_to @recipe.category.name, category_path(@recipe) %></li>
+  <!-- want the @recipe.category.name to link to @category.recipes -->
+    <li style="margin-left:20px;"><%= link_to @recipe.category.name%></li>
   </ul>
 
 <h5 style="font-size:1.45rem">● Description:</h5>

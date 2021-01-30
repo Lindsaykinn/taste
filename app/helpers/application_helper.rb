@@ -14,6 +14,9 @@ module ApplicationHelper
         end +
         content_tag('li') do
           link_to('Categories', categories_path)
+        end +
+        content_tag('li') do
+          link_to('Create Category', new_category_path)
         end
       else
         content_tag('li') do
