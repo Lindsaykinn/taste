@@ -11,6 +11,9 @@ module ApplicationHelper
         end +
         content_tag('li') do
           link_to('Logout', destroy_user_session_path, method: 'DELETE')
+        end +
+        content_tag('li') do
+          link_to('Categories', categories_path)
         end
       else
         content_tag('li') do

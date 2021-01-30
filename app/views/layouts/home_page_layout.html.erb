@@ -24,12 +24,17 @@
 
   <body>
     <div class="container">
-      <%= yield %>   
+      <%= yield %>  
+      
       <ul>
-        <li><%= link_to "Recipes", recipes_path %></li>
-        <li><%= link_to "Signup", signup_path %></li>
-        <li><%= link_to "Login", login_path %></li>
-        <li><%= link_to 'Log In With Google', '/auth/google_oauth2', method: :post%></li>
+        <li><%= link_to "Recipes", recipes_path, class:"custom_button" %></li>
+        <br>
+        <li><%= link_to "Signup", signup_path, class:"custom_button"%></li>
+        <br>
+        <li><%= link_to "Login", login_path, class:"custom_button"%></li>
+        <br>
+        <li><%= link_to 'Log In With Google', '/auth/google_oauth2', method: :post, class:"custom_button"%></li>
+        <br>
       </ul>
     </div>
   </body>
