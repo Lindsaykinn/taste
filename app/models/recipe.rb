@@ -1,6 +1,8 @@
 class Recipe < ApplicationRecord
   belongs_to :category
   has_many :users, through: :categories  
+  has_many: ingredients
+  has_many: instructions
   accepts_nested_attributes_for :category, reject_if: :all_blank
   validates :title, presence: true, uniqueness: true
 

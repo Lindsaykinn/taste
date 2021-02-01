@@ -1,4 +1,6 @@
 Rails.application.routes.draw do  
+  resources :instructions
+  resources :ingredients
   root to: 'static#home'
   
   resources :recipes
