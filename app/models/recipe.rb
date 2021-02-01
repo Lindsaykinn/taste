@@ -1,9 +1,11 @@
 class Recipe < ApplicationRecord
   belongs_to :category
-  has_many :users, through: :categories  
-  has_many: ingredients
-  has_many: instructions
   accepts_nested_attributes_for :category, reject_if: :all_blank
+  has_many :users, through: :categories  
+  has_many :ingredients, dependent: :destroy
+  accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: :true
+  has_many :instructions, dependent: :destroy
+  accepts_nested_attributes_for :instructions, reject_if: :all_blank, allow_destroy: :true
   validates :title, presence: true, uniqueness: true
 
   # def categories_attributes=(categories_attributes)
