@@ -15,6 +15,14 @@ nav {
 
 }
 
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
 .custom_button{
   background-color: #006a71;
   background-image: -webkit-linear-gradient(top, #11999E, #006a71);

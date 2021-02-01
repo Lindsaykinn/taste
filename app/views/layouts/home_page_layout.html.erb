@@ -26,6 +26,7 @@
     <div class="container">
       <%= yield %>  
       
+      <% if !user_signed_in? %>
       <ul>
         <li><%= link_to "Recipes", recipes_path, class:"custom_button" %></li>
         <br>
@@ -36,6 +37,11 @@
         <li><%= link_to 'Log In With Google', '/auth/google_oauth2', method: :post, class:"custom_button"%></li>
         <br>
       </ul>
+      <% else %>
+        <li><%= link_to 'Logout', destroy_user_session_path, method: 'DELETE', class:"custom_button" %></li>
+        <br>
+        <li><%= link_to 'Back to Recipes', recipes_path, class: "custom_button" %> </li>
     </div>
+     <% end %>
   </body>
 </html>
