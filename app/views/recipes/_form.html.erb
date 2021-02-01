@@ -13,29 +13,40 @@
     <%= f.text_field :description %>
   </div>
 
-  <div>
-    <%= f.label :ingredients %>
-    <%= f.text_field :ingredient %>
-  </div>
-  
-  <div>
-    <%= f.label :instructions %>
-    <%= f.text_field :instructions%>
-  </div>
-
-  <h4>Select Category</h4>
+    <h4>Add Ingredients</h4>
     <div>
-      <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>    
+      <%= f.fields_for :ingredients do |ingredient| %>
+      <%= render 'ingredient_fields', f: ingredient %>
+      <% end %>
+      <div class="links">
+      <%= link_to_add_association 'Add Ingredient', f, :ingredients %>
+      </div>
     </div>
 
-  <h4>Create Category</h4>
-    <%= f.fields_for :category, recipe.build_category do |cb| %>
+    <h4>Add Instructions</h4>
     <div>
-      <%= cb.label :name %>
-      <%= cb.text_field :name %>
-      <%= cb.hidden_field :user_id, value:current_user.id %>
+      <%= f.fields_for :instructions do |instruction| %>
+      <%= render 'instruction_fields', f: instruction %>
+      <% end %>
+      <div class="links">
+      <%= link_to_add_association 'Add Step', f, :instructions %>
+      </div>
     </div>
-    <% end %>
+
+
+    <h4>Select Category</h4>
+      <div>
+        <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>    
+      </div>
+
+    <h4>Create Category</h4>
+      <%= f.fields_for :category, recipe.build_category do |cb| %>
+      <div>
+        <%= cb.label :name %>
+        <%= cb.text_field :name %>
+        <%= cb.hidden_field :user_id, value:current_user.id %>
+      </div>
+      <% end %>
 
   <%= f.submit button_name, class: "custom_button"%>
 <% end %>

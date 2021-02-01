@@ -15,13 +15,18 @@
 
 <h5 style="font-size:1.45rem">● Ingredients:</h5>
   <ul>
-    <li style="margin-left:20px;"><%=@recipe.ingredient%></li>
+    <% for @ingredient in @recipe.ingredients %>
+      <li style="margin-left:57px;"><%= @ingredient.ingredient_name %></li>
+      <% end %>    
   </ul>
 
-
-<h5 style="font-size:1.45rem">● Instructions: </h5> 
-  <p style="margin-left:20px;"><%= @recipe.instructions%> </p>
-</div>
+<h5 style="font-size:1.45rem">● Instructions:</h5>
+  <ol>
+    <% for @instruction in @recipe.instructions %>
+      <li style="margin-left:20px;"><%= @instruction.step %></li>
+      <% end %>    
+  </ol>
+  
 
 <div style="margin-left:35px;">
 <%= link_to "Edit", edit_recipe_path(@recipe), class:"custom_button" %>
