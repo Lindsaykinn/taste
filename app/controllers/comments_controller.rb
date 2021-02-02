@@ -23,4 +23,24 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
+  def update
+    if @comment.update(comment_params)
+      flash.now[:notice] = "Your comment has been updated."
+      redirect_to recipe_path(@recipe)
+    else
+      flash.now[:notice] = "The comment was not updated."
+      redirect_to recipe_path(@recipe)
+    end
+  end
+
+  def destroy
+    @comment.destroy
+    flash[:notice] = "The comment was deleted."
+    redirect_to recipes_path
+  end
+
 end
