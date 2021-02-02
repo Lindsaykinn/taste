@@ -13,13 +13,14 @@ class CommentsController < ApplicationController
   def create 
     if user_signed_in?
       comment = Comment.new(comment_params)
-      comment.recipe = find_by_recipe_id
+      comment.recipe = find_by_recipe_id(@recipe)
       comment.user = current_user
       if comment.save
-        redirect_to recipe_path
+        flash[:notice] = "Comment has been added."
       end
     else
       flash[:notice] = "You must be logged in to post a comment."
+      redirect_to recipe_path
     end
   end
 
@@ -43,4 +44,10 @@ class CommentsController < ApplicationController
     redirect_to recipes_path
   end
 
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 end
