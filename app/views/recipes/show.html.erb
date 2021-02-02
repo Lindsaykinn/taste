@@ -14,21 +14,22 @@
   </ul>
 
 <h5 style="font-size:1.45rem">● Ingredients:</h5>
-  <ul>
+  <ul style="margin-left:25px;">
     <% for @ingredient in @recipe.ingredients %>
-      <li style="margin-left:57px;"><%= @ingredient.ingredient_name %></li>
+      <li><%= @ingredient.ingredient_name %></li>
       <% end %>    
   </ul>
 
 <h5 style="font-size:1.45rem">● Instructions:</h5>
-  <ol>
-    <% for @instruction in @recipe.instructions %>
-      <li style="margin-left:20px;"><%= @instruction.step %></li>
-      <% end %>    
-  </ol>
+    <ol>
+      <% for @instruction in @recipe.instructions %>
+        <li><%= @instruction.step %></li>
+        <% end %>    
+    </ol>
 <br>
 
-<div>
+<h5 style="font-size:1.45rem">● Recipe Comments:</h5>
+<div style="margin-left:25px;">
   <%= render 'comments/comments_list', comments: @recipe.comments if @recipe.comments %>
 </div>
 <br>
