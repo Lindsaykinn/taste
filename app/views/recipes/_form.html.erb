@@ -13,8 +13,8 @@
     <%= f.text_field :description %>
   </div>
 
-    <h4>Add Ingredients</h4>
-    <div>
+    <h5>Add Ingredients</h5>
+    <div style="margin-left:30px">
       <%= f.fields_for :ingredients do |ingredient| %>
       <%= render 'ingredient_fields', f: ingredient %>
       <% end %>
@@ -23,8 +23,8 @@
       </div>
     </div>
 
-    <h4>Add Instructions</h4>
-    <div>
+    <h5>Add Instructions</h5>
+    <div style="margin-left:30px">
       <%= f.fields_for :instructions do |instruction| %>
       <%= render 'instruction_fields', f: instruction %>
       <% end %>
@@ -34,14 +34,14 @@
     </div>
 
 
-    <h4>Select Category</h4>
-      <div>
+    <h5>Select Category</h5>
+      <div style="margin-left:30px">
         <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Select Category" %>    
       </div>
 
-    <h4>Create Category</h4>
+    <h5>Create Category</h5>
       <%= f.fields_for :category, recipe.build_category do |cb| %>
-      <div>
+      <div style="margin-left:30px">
         <%= cb.label :name %>
         <%= cb.text_field :name %>
         <%= cb.hidden_field :user_id, value:current_user.id %>
