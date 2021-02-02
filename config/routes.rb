@@ -1,5 +1,6 @@
 Rails.application.routes.draw do  
   resources :comments, only: [:destroy]
+  resources :users
   resources :instructions
   resources :ingredients
   root to: 'static#home'
