@@ -1,37 +1,8 @@
-<h3>Create Category</h3>
+<h3>Create Recipe</h3>
 
-<%= form_for @category do |f| %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+<%= render partial: "form", locals: {recipe: @recipe, button_name: "Create Recipe"} %>
 
-  <%= f.fields_for :recipes, @category.recipes do |r| %>
-    <h3>Create Recipe</h3>
-      <div>
-        <%=r.label :title%>
-        <%=r.text_field :title%>
-      </div>
 
-      <div>
-        <%= r.label :rating %>
-        <%= r.number_field :rating, in: 1..5 %>
-      </div>
-
-      <div>
-        <%= r.label :description %>
-        <%= r.text_field :description %>
-      </div>
-
-      <div>
-        <%= r.label :ingredients %>
-        <%= r.text_field :ingredient %>
-      </div>
-  
-      <div>
-        <%= r.label :instructions %>
-        <%= r.text_field :instructions%>
-      </div>
-    <% end %>
-    <%= f.submit "Create Category", class:"custom_button" %>
-  <% end %>
+<script>$(document).ready(function(){
+    $('select').formSelect();
+  });</script>
