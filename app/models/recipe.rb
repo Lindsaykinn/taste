@@ -6,6 +6,7 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: :true
   has_many :instructions, dependent: :destroy
   accepts_nested_attributes_for :instructions, reject_if: :all_blank, allow_destroy: :true
+  has_many :comments
   validates :title, presence: true, uniqueness: true
 
   # def categories_attributes=(categories_attributes)
