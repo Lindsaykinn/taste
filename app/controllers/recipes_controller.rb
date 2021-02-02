@@ -42,6 +42,9 @@ class RecipesController < ApplicationController
     if @category
       redirect_to category_recipe_path(@category) 
     end
+    if @comment
+      redirect_to recipe_path(@recipe)
+    end
   end
 
   def edit
