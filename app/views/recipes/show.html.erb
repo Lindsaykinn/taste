@@ -26,9 +26,22 @@
       <li style="margin-left:20px;"><%= @instruction.step %></li>
       <% end %>    
   </ol>
-  
+<br>
 
-<div style="margin-left:35px;">
-<%= link_to "Edit", edit_recipe_path(@recipe), class:"custom_button" %>
-<%= link_to "Delete", recipe_path(@recipe), method: "delete", class:"custom_button"%>
+<div>
+  <%= render 'comments/comments_list', comments: @recipe.comments if @recipe.comments %>
+</div>
+<br>
+
+
+  <h5>Add Recipe Comments:</h5>
+    <%= render 'comments/form', comment: @recipe.comments.new, recipe: @recipe %>
+
+  <br>
+  <br>
+
+
+<div>
+<%= link_to "Edit Recipe", edit_recipe_path(@recipe), class:"custom_button" %>
+<%= link_to "Delete Recipe", recipe_path(@recipe), method: "delete", class:"custom_button"%>
 </div>
