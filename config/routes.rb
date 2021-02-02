@@ -1,12 +1,17 @@
 Rails.application.routes.draw do  
+  resources :comments
   resources :instructions
   resources :ingredients
   root to: 'static#home'
   
   resources :recipes
+    
   resources :categories do
       resources :recipes
   end
+
+  
+  get '/users/:id', to: 'users#show', :as => 'myrecipes'
 
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
