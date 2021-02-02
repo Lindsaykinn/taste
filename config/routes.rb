@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root to: 'static#home'
   
   resources :recipes do
-    resources :comments, except [:destroy]
+    resources :comments, except: [:destroy]
     post '/comments', to: 'comments#create'
   end
     
