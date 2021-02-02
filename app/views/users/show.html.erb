@@ -1,0 +1,5 @@
+<h3><u><%=@user.first_name%>'s Recipes</u></h3>
+
+<% @user.recipes.each do |recipe| %>
+  <li> <%= render recipe %> </li>
+  <% end %>
