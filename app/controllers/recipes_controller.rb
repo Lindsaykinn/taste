@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
   before_action :find_category, only: [:index, :new, :create]
   before_action :redirect_if_not_logged_in
+
   def index
     if @category 
       @recipes = @category.recipes
@@ -83,7 +84,9 @@ class RecipesController < ApplicationController
       :ingredient, 
       :instructions, 
       :rating, 
-      category_attributes: [:name, :user_id]
+      category_attributes: [:name, :user_id],
+      ingredients_attributes: [:id, :ingredient_name],
+      instructions_attributes: [:id, :step]
     )
   end
 end
