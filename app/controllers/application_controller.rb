@@ -18,5 +18,9 @@ class ApplicationController < ActionController::Base
     User.find_by_id(session[:user_id]) if user_signed_in?
   end
 
+  def find_by_recipe_id(recipe)
+    Recipe.find_by(id: params[:recipe_id])
+  end
+
 
 end
