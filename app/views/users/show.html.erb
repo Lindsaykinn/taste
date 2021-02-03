@@ -1,6 +1,6 @@
 <h4><u><%=@user.first_name%>'s Recipes</u></h4>
-<div>
+<ul>
 <% @user.recipes.each do |recipe| %>
-  <%= render recipe %> 
+  <li><%= render recipe %></li> 
   <% end %>
-</div>
+</ul>

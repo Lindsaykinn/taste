@@ -9,6 +9,9 @@ class RecipesController < ApplicationController
     else
       @recipes = Recipe.all.alphabetize
     end
+    if @comment 
+      @recipes = @comment.recipes
+    end
   end
 
   def new
