@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
     if @category 
       @recipes = @category.recipes
     else
-      @recipes = Recipe.all.alphabetize
+      @recipes = Recipe.all
     end
     if @comment 
       @recipes = @comment.recipes
@@ -24,6 +24,7 @@ class RecipesController < ApplicationController
   end
 
   def create
+    params[:recipe][:user_id] = current_user.id
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
       if @category
@@ -82,10 +83,13 @@ class RecipesController < ApplicationController
     end
   end
 
+  
+
   def recipe_params
     params.require(:recipe).permit(
       :title, 
-      :category_id, 
+      :category_id,
+      :user_id,
       :description, 
       :ingredient, 
       :instructions, 

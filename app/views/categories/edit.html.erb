@@ -1,7 +1,7 @@
 <h3>Edit <%= @category.name %></h3>
 
 
-    <%= form_for @category do |f| %>
+    <%= form_for [@category] do |f| %>
     <div>
       <%= f.label :name %>
       <%= f.text_field :name %>
