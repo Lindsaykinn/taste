@@ -4,8 +4,8 @@
 
 <h5 style="font-size:1.45rem"> ● Category:</h5>
   <ul>
-  <!-- want the @recipe.category.name to link to @category.recipes -->
-    <li style="margin-left:20px;"><%= link_to @recipe.category.name%></li>
+  
+    <li style="margin-left:20px;"><%= link_to @recipe.category_name, category_path(@recipe.category_id) %></li>
   </ul>
 
 <h5 style="font-size:1.45rem">● Description:</h5>
@@ -32,12 +32,13 @@
 <h5 style="font-size:1.45rem">● Recipe Comments:</h5>
 <div style="margin-left:25px;">
   <%= render 'comments/comments_list', comments: @recipe.comments if @recipe.comments %>
+  
 </div>
 <br>
 
 
   <h5>Add Recipe Comments:</h5>
-    <%= render 'comments/form', comment: @recipe.comments.new, recipe: @recipe %>
+    <%= render 'comments/form', comment: @recipe.comments.new, recipe: @recipe %>   
 
   <br>
   <br>

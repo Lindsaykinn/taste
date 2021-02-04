@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :find_comment, only: [:edit, :update, :destroy]
   def new 
     @comment = Comment.new
   end
@@ -10,38 +11,48 @@ class CommentsController < ApplicationController
     # end 
   end
 
-  def create 
-    if user_signed_in?
+  def create
       comment = Comment.new(comment_params)
       comment.recipe = find_by_recipe_id(@recipe)
-      comment.user = current_user
-      if comment.save
+      
+      if comment.user_id = current_user.id
+        comment.save
         flash[:notice] = "Comment has been added."
+        redirect_to recipe_path(comment.recipe)
+      else
+        flash[:notice] = "You must be logged in to post a comment."
+        redirect_to recipe_path
       end
-    else
-      flash[:notice] = "You must be logged in to post a comment."
-      redirect_to recipe_path
-    end
   end
 
   def edit
-
+    
   end
 
+
+
   def update
-    if @comment.update(comment_params)
+    if @comment.user_id = current_user.id
+      @comment.update(comment_params)
       flash.now[:notice] = "Your comment has been updated."
-      redirect_to recipe_path(@recipe)
+      redirect_to recipe_path
     else
-      flash.now[:notice] = "The comment was not updated."
-      redirect_to recipe_path(@recipe)
+      flash.now[:notice] = "You cannot update this comment."
+      redirect_to recipe_path
     end
+    
   end
 
   def destroy
+    find_comment
+    if current_user.id == @comment.user
+    @comment = current_user.comments.find(params[:id])
     @comment.destroy
     flash[:notice] = "The comment was deleted."
     redirect_to recipes_path
+    else
+    redirect_to recipes_path
+    end
   end
 
 
@@ -49,5 +60,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def find_comment
+    @comment = Comment.find(params[:id])
   end
 end
