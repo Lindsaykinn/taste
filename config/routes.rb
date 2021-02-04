@@ -1,21 +1,20 @@
 Rails.application.routes.draw do  
   resources :comments, only: [:destroy, :new, :update]
-  resources :users
+  resources :users do
+    resources :recipes
+  end
   resources :instructions
   resources :ingredients
   root to: 'static#home'
   
   resources :recipes do
-    resources :comments, except: [:destroy]
-    post '/comments', to: 'comments#create'
+    resources :comments
   end
     
   resources :categories do
       resources :recipes
   end
 
-  
-  get '/users/:id', to: 'users#show', :as => 'myrecipes'
 
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
