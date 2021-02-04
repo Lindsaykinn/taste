@@ -22,5 +22,9 @@ class ApplicationController < ActionController::Base
     Recipe.find_by(id: params[:recipe_id])
   end
 
+  def find_recipe
+    @recipe = Recipe.find_by_id(params[:id])
+  end
+
 
 end
