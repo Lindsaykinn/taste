@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
   before_action :find_category, only: [:index, :new, :create]
   before_action :redirect_if_not_logged_in
+  before_action :redirect_if_not_owner, only: [:edit, :update, :destroy]
 
   def index
     if @category 
@@ -81,6 +82,12 @@ class RecipesController < ApplicationController
     if params[:category_id]
       @category = Category.find_by_id(params[:category_id])
     end
+  end
+
+  def redirect_if_not_owner
+    flash[:notice] = "You cannot delete or update a recipe if you are not the owner."
+    return redirect_to recipes_path unless @recipe 
+    redirect_to recipes_path unless current_user.id == @recipe.user_id
   end
 
   
