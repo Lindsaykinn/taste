@@ -2,7 +2,8 @@
 <% if user_signed_in? %>
   <ul id="dropdown1" class="dropdown-content">
     <li><%= link_to 'All Recipes', recipes_path%></li>
-    <li><%= link_to 'My Recipes', "#" %></li>
+    <!-- recipe_myrecipes_path -->
+    <li><%= link_to 'My Recipes', user_path(current_user.id) %></li>
     <li><%= link_to 'Create Recipe', new_recipe_path %></li>
   </ul>
   <ul id="dropdown2" class="dropdown-content">

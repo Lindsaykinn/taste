@@ -10,4 +10,7 @@
   <% end %>
   <br>
 
-  <%= link_to "Create Recipe with Category", new_recipe_path, class: "custom_button" %>
+<!-- see if i can pass data into the path below so it can auto-populate -->
+<!-- or path with a query param within the url -->
+  <%= link_to "Create Recipe with Category", new_category_recipe_path(@category.recipes), class: "custom_button" %>
+
