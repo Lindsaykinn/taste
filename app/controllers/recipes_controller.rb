@@ -82,9 +82,11 @@ class RecipesController < ApplicationController
   end
 
   def redirect_if_not_owner
+    if current_user.id != @recipe.user_id
     flash[:notice] = "You cannot delete or update a recipe if you are not the owner."
-    return redirect_to recipes_path unless @recipe 
-    redirect_to recipes_path unless current_user.id == @recipe.user_id
+    return redirect_to recipe_path unless @recipe 
+    redirect_to recipe_path unless current_user.id == @recipe.user_id
+    end
   end  
 
   def recipe_params
