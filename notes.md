@@ -7,5 +7,4 @@ accepts_nested_attributes_for should be written out in the model as:
   To Do:
 
   -- add ratings to comments or remove ratings
-  -- need to add option to add multiple categories to one recipe
 
