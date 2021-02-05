@@ -8,7 +8,7 @@ class RecipesController < ApplicationController
     if @category 
       @recipes = @category.recipes
     else
-      @recipes = Recipe.all
+      @recipes = Recipe.all.alphabetize
     end
   end
 
@@ -79,6 +79,10 @@ class RecipesController < ApplicationController
     if params[:category_id]
       @category = Category.find_by_id(params[:category_id])
     end
+  end
+
+  def alphabetize
+    order(title: :asc)
   end
 
   def redirect_if_not_owner

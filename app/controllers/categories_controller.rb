@@ -54,6 +54,10 @@ class CategoriesController < ApplicationController
 
   private
 
+  def alphabetize
+    order(name: :asc)
+  end
+
   def find_category
     @category = Category.find_by_id(params[:id])
   end
