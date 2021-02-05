@@ -10,9 +10,6 @@ class RecipesController < ApplicationController
     else
       @recipes = Recipe.all
     end
-    if @comment 
-      @recipes = @comment.recipes
-    end
   end
 
   def new
@@ -73,7 +70,7 @@ class RecipesController < ApplicationController
 
   
   private
-
+  
   def find_recipe
     @recipe = Recipe.find_by_id(params[:id])
   end
@@ -88,9 +85,7 @@ class RecipesController < ApplicationController
     flash[:notice] = "You cannot delete or update a recipe if you are not the owner."
     return redirect_to recipes_path unless @recipe 
     redirect_to recipes_path unless current_user.id == @recipe.user_id
-  end
-
-  
+  end  
 
   def recipe_params
     params.require(:recipe).permit(

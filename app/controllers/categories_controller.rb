@@ -29,6 +29,10 @@ class CategoriesController < ApplicationController
     @category = Category.find_by_id(params[:id])
   end
 
+  def edit
+    
+  end
+
   def update
     if @category.update(category_params)
       redirect_to category_path(@category)

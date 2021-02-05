@@ -1,14 +1,13 @@
 class CommentsController < ApplicationController
   before_action :find_comment, only: [:edit, :update, :destroy]
+  before_action :comment_auth, only: [:edit, :update, :destroy]
+  
   def new 
     @comment = Comment.new
   end
 
   def show
     comment = Comment.find_by(user: current_user, recipe: find_by_recipe_id)
-    # respond_to do |f|        
-    #   f.json {render json: comment}       
-    # end 
   end
 
   def create
@@ -25,26 +24,22 @@ class CommentsController < ApplicationController
       end
   end
 
-  def edit
-    
+  def edit  
   end
-
-
 
   def update
     if @comment.user_id = current_user.id
-      @comment.update(comment_params)
+      @comment.update(comment_params)      
+      redirect_to recipe_path(@comment.recipe)
       flash.now[:notice] = "Your comment has been updated."
-      redirect_to recipe_path
     else
-      flash.now[:notice] = "You cannot update this comment."
       redirect_to recipe_path
+      flash.now[:notice] = "You cannot update this comment."
     end
     
   end
 
   def destroy
-    find_comment
     if current_user.id == @comment.user
     @comment = current_user.comments.find(params[:id])
     @comment.destroy
@@ -58,11 +53,20 @@ class CommentsController < ApplicationController
 
   private
 
+  def comment_auth
+    @comment = find_comment
+    if @comment.user_id != current_user.id
+      flash[:notice] = "You must be comment owner to update comment."
+      redirect_to recipe_path(@comment.recipe)
+    end
+  end
+
   def comment_params
+    #do i need to add permission for recipe_id & user_id?
     params.require(:comment).permit(:content)
   end
 
   def find_comment
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find_by_id(params[:id])
   end
 end
