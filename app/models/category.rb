@@ -1,11 +1,7 @@
 class Category < ApplicationRecord
-  belongs_to :user
+  belongs_to :users
   has_many :recipes
   accepts_nested_attributes_for :recipes, reject_if: :all_blank
-  has_many :ingredients
-  accepts_nested_attributes_for :ingredients, reject_if: :all_blank
-  has_many :instructions
-  accepts_nested_attributes_for :instructions, reject_if: :all_blank
 
   validates :name, presence: true, uniqueness: true
 
