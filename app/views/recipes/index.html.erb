@@ -1,4 +1,4 @@
-<h3>All Recipes <%= @category.name if @category%></h3>
+<h3>All <%= @category.name if @category%> Recipes </h3>
 <ul>
   <%@recipes.each do |recipe| %>
   <li><%= link_to recipe.title, recipe_path(recipe) %></li>
