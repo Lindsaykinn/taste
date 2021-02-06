@@ -40,13 +40,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @comment.user
-    @comment = current_user.comments.find(params[:id])
+    if @comment.user_id == current_user.id 
     @comment.destroy
     flash[:notice] = "The comment was deleted."
-    redirect_to recipes_path
+    redirect_to recipe_path
     else
-    redirect_to recipes_path
+    flash[:notice] = "You must be comment owner to delete comment."
+    redirect_to recipe_path
     end
   end
 
