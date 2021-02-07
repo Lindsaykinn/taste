@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to recipes_path
+      redirect_to user_path(@user)
     else
       flash.now[:notice] = "Invalid email or password"
       render :new
@@ -19,20 +19,19 @@ class SessionsController < ApplicationController
   end
 
   #logging in with omniauth through Google
-  def omniauth
+  def omniauth #if they are logging in with oauth
     user = User.find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
-      user.email = auth["info"]["email"]
-      user.password = SecureRandom.hex(10)
-      user.first_name = auth["info"]["email"]
-      user.last_name = auth["info"]["email"]
-    end
-    if user.valid?
-      session[:user_id] = user.id
-      redirect_to recipes_path
+        user.email = auth["info"]["email"]
+        user.password = SecureRandom.hex(15)
+        user.name = auth["info"]["name"]
+        end
+    if user.valid? #if the user exsists then I want to save them into my session
+        session[:user_id] = user.id  
+        redirect_to user_path(user)
     else
-      redirect_to signup_path
+        redirect_to login_path
     end
-  end    
+end
 
 
   def destroy 
