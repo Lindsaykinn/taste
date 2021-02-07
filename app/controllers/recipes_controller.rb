@@ -95,7 +95,6 @@ class RecipesController < ApplicationController
       :description, 
       :ingredient, 
       :instructions, 
-      :rating, 
       category_attributes: [:name, :user_id],
       ingredients_attributes: [:id, :ingredient_name],
       instructions_attributes: [:id, :step]

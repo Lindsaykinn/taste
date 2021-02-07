@@ -62,7 +62,7 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(
       :name, 
       :user_id, 
-      recipes_attributes: [:title, :description, :rating], 
+      recipes_attributes: [:title, :description], 
       ingredients_attributes: [:id, :ingredient_name],
       instructions_attributes: [:id, :step]
       )
