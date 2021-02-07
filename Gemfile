@@ -31,7 +31,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'omniauth'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'omniauth-google-oauth2'
-# gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-rails_csrf_protection'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
