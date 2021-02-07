@@ -1,4 +1,5 @@
 Rails.application.routes.draw do  
+  resources :recipe_ingredients
   resources :comments, only: [:destroy, :new, :update]
   resources :users do
     resources :recipes
